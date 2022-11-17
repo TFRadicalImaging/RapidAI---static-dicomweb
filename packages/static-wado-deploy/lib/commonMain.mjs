@@ -8,18 +8,20 @@ async function doDeploy(config, name, options, deployPlugin, storeOption) {
 }
 
 export default async function commonMain(config, name, options, storeOption) {
+  console.log({ options, storeOption });
   const deployPlugin = config.deployPlugin;
   console.log(`Deploy ${name}`, deployPlugin);
   const deployments = config.deployments;
-  if (deployments) {
-    deployments.forEach(async (deployment) => {
-      if (deployment[`${name}Group`] && (!options.deployments || options.deployments.includes(deployment.name))) {
-        await doDeploy(deployment, name, options, deployPlugin, storeOption);
-      } else {
-        await console.log("skipping deployment", deployment.name);
-      }
-    });
-  } else {
-    doDeploy(config, name, options, deployPlugin, storeOption);
-  }
+  console.log("deployments: ", deployments);
+  // if (deployments) {
+  //   deployments.forEach(async (deployment) => {
+  //     if (deployment[`${name}Group`] && (!options.deployments || options.deployments.includes(deployment.name))) {
+  //       await doDeploy(deployment, name, options, deployPlugin, storeOption);
+  //     } else {
+  //       await console.log("skipping deployment", deployment.name);
+  //     }
+  //   });
+  // } else {
+  //   doDeploy(config, name, options, deployPlugin, storeOption);
+  // }
 }
